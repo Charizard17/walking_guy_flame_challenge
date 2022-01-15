@@ -1,1 +1,1 @@
-# walking_guy_flame_challenge
+# walking_knight_flame_challenge
