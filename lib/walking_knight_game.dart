@@ -33,10 +33,10 @@ class WalkingKnightGame extends FlameGame {
     walkingKnight =
         SpriteAnimationComponent.fromFrameData(spriteSheet, spriteData)
           ..x = 5
-          ..y = 105
+          ..y = 250
           ..size = spriteSize;
 
-    // add(walkingKnight);
+    add(walkingKnight);
   }
 
   @override
@@ -47,27 +47,15 @@ class WalkingKnightGame extends FlameGame {
       case 'right':
         walkingKnight.x += walkingSpeed;
         break;
-      case 'down':
-        walkingKnight.y += walkingSpeed;
-        break;
       case 'left':
         walkingKnight.x -= walkingSpeed;
         break;
-      case 'up':
-        walkingKnight.y -= walkingSpeed;
-        break;
     }
 
-    if (walkingKnight.x > 300) {
-      direction = 'down';
-    }
-    if (walkingKnight.y > 500) {
+    if (walkingKnight.x > size[0] - 80) {
       direction = 'left';
     }
-    if (walkingKnight.x < 5) {
-      direction = 'up';
-    }
-    if (walkingKnight.y < 105) {
+    if (walkingKnight.x < 20) {
       direction = 'right';
     }
   }
