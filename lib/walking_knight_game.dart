@@ -12,6 +12,11 @@ class WalkingKnightGame extends FlameGame {
   Future<void> onLoad() async {
     await super.onLoad();
 
+    SpriteComponent background = SpriteComponent()
+      ..sprite = await loadSprite('background.png')
+      ..size = size;
+    add(background);
+
     knight
       ..sprite = await loadSprite('knight_stand.png')
       ..size = Vector2(58.7, 70.7)
@@ -31,7 +36,7 @@ class WalkingKnightGame extends FlameGame {
           ..y = 105
           ..size = spriteSize;
 
-    add(walkingKnight);
+    // add(walkingKnight);
   }
 
   @override
