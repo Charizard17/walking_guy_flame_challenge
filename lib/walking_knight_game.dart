@@ -4,7 +4,8 @@ import 'package:flame/components.dart';
 
 class WalkingKnightGame extends FlameGame {
   SpriteComponent knight = SpriteComponent();
-  SpriteAnimationComponent walkingKnight = SpriteAnimationComponent();
+  SpriteAnimationComponent knightWalking = SpriteAnimationComponent();
+  SpriteAnimationComponent knightAttacking = SpriteAnimationComponent();
   String direction = 'right';
   double walkingSpeed = 1;
 
@@ -24,19 +25,32 @@ class WalkingKnightGame extends FlameGame {
       ..y = 250;
     add(knight);
 
-    var spriteSheet = await images.load('knight_spritesheet.png');
+    var spriteSheetWalking = await images.load('knight_walk_spritesheet.png');
     final spriteSize = Vector2(58.7, 70.7);
     SpriteAnimationData spriteData = SpriteAnimationData.sequenced(
         amount: 10,
         stepTime: 0.1,
         textureSize: Vector2(100 / 70.7 * 58.7, 100));
-    walkingKnight =
-        SpriteAnimationComponent.fromFrameData(spriteSheet, spriteData)
+    knightWalking =
+        SpriteAnimationComponent.fromFrameData(spriteSheetWalking, spriteData)
           ..x = 5
           ..y = 250
           ..size = spriteSize;
+    add(knightWalking);
 
-    add(walkingKnight);
+    var spriteSheetAttacking =
+        await images.load('knight_attack_spritesheet.png');
+    // SpriteAnimationData spriteData = SpriteAnimationData.sequenced(
+    //     amount: 10,
+    //     stepTime: 0.1,
+    //     textureSize: Vector2(100 / 70.7 * 58.7, 100));
+    knightAttacking =
+        SpriteAnimationComponent.fromFrameData(spriteSheetAttacking, spriteData)
+          ..x = 250
+          ..y = 250
+          ..size = spriteSize;
+
+    add(knightAttacking);
   }
 
   @override
@@ -45,17 +59,17 @@ class WalkingKnightGame extends FlameGame {
 
     switch (direction) {
       case 'right':
-        walkingKnight.x += walkingSpeed;
+        knightWalking.x += walkingSpeed;
         break;
       case 'left':
-        walkingKnight.x -= walkingSpeed;
+        knightWalking.x -= walkingSpeed;
         break;
     }
 
-    if (walkingKnight.x > size[0] - 80) {
+    if (knightWalking.x > size[0] - 80) {
       direction = 'left';
     }
-    if (walkingKnight.x < 20) {
+    if (knightWalking.x < 20) {
       direction = 'right';
     }
   }
